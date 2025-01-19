@@ -56,7 +56,7 @@ exports.createUser = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0,
         }).status(201).json(new apiResponse_1.default(201, token, "Registred successfully"));
     }
     catch (error) {
-        throw new errorHandler_1.default(500, "Something went wrong please try again");
+        throw new errorHandler_1.default(400, "Something went wrong please try again");
     }
 }));
 // sign in user

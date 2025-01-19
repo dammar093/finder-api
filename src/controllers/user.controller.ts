@@ -47,7 +47,7 @@ export const createUser = asyncHandler(async (req: Request, res: Response) => {
       "Registred successfully"
     ));
   } catch (error) {
-    throw new ApiError(500, "Something went wrong please try again")
+    throw new ApiError(400, "Something went wrong please try again")
   }
 });
 

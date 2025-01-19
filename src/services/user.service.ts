@@ -6,7 +6,9 @@ import ApiError from "../utils/errorHandler";
 export const createUserService = async (user: UserInterface) => {
 
   try {
-    const exitUser = await User.findOne({ email: user?.email })
+    const exitUser = await User.findOne({ email: user?.email, phoneNumber: user?.phoneNumber });
+    console.log("exist", exitUser);
+
     if (exitUser) {
       throw new ApiError(400, "User already exist with this email")
     }
@@ -22,7 +24,6 @@ export const createUserService = async (user: UserInterface) => {
     return savedUser;
   } catch (error) {
     console.log("errr", error);
-
     throw new ApiError(500, "Something went wrong please try again")
   }
 }

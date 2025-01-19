@@ -19,7 +19,8 @@ const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 //signup service 
 const createUserService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const exitUser = yield user_model_1.default.findOne({ email: user === null || user === void 0 ? void 0 : user.email });
+        const exitUser = yield user_model_1.default.findOne({ email: user === null || user === void 0 ? void 0 : user.email, phoneNumber: user === null || user === void 0 ? void 0 : user.phoneNumber });
+        console.log("exist", exitUser);
         if (exitUser) {
             throw new errorHandler_1.default(400, "User already exist with this email");
         }
