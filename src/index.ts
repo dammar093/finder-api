@@ -2,6 +2,7 @@ import app from "./app";
 import dotenv from "dotenv";
 import express from "express";
 import userRouter from "./routes/user.routes"
+import categoryRouter from "./routes/category.routes";
 import cors from "cors";
 import connectDb from "./config/db";
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 connectDb().then(() => {
   app.use("/api/v1/users", userRouter);
+  app.use("/api/v1/categories", categoryRouter);
   app.listen(PORT, () => {
     console.log(`Sever running on port::${PORT}`);
   });

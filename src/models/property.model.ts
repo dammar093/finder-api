@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, ObjectId } from "mongoose";
 import { UserInterface } from "./user.model";
 
 // property interface
-interface PropertyInerface extends Document {
+export interface PropertyInerface extends Document {
   title: string;
   description: string;
   services?: string[];
@@ -10,7 +10,8 @@ interface PropertyInerface extends Document {
   location: string;
   longitude: number;
   latitude: number;
-  user: ObjectId
+  images: string[];
+  user: ObjectId;
 }
 
 // property schema
@@ -40,6 +41,10 @@ const propertySchem = new Schema<PropertyInerface>({
   },
   longitude: {
     type: Number,
+    required: true
+  },
+  images: {
+    type: [String],
     required: true
   },
   user: {

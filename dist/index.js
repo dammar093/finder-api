@@ -7,6 +7,7 @@ const app_1 = __importDefault(require("./app"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const category_routes_1 = __importDefault(require("./routes/category.routes"));
 const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./config/db"));
 dotenv_1.default.config();
@@ -18,6 +19,7 @@ app_1.default.use(express_1.default.json());
 app_1.default.use(express_1.default.urlencoded({ extended: true }));
 (0, db_1.default)().then(() => {
     app_1.default.use("/api/v1/users", user_routes_1.default);
+    app_1.default.use("/api/v1/categories", category_routes_1.default);
     app_1.default.listen(PORT, () => {
         console.log(`Sever running on port::${PORT}`);
     });
