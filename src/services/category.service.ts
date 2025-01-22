@@ -24,4 +24,9 @@ export const updateCategoryService = async (id: string, isActive: boolean) => {
   category.isActive = isActive;
   await category.save();
   return category;
-} 
+}
+
+export const getCategoriesService = async () => {
+  const categories = await Category.find();
+  return categories;
+};
