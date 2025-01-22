@@ -1,17 +1,39 @@
-import Property from "../models/property.model";
+import Property, { PropertyInerface } from "../models/property.model";
 
-export const uploadPropertyService = async (title: string, description: string, price: number, location: string, longitude: number, latitude: number, bedrooms: number, bathrooms: number, image: string) => {
-  const property = new Property({
+export const createPropertyService = async (
+  title: string,
+  description: string,
+  services: string[],
+  price: number,
+  location: string,
+  longitude: number,
+  latitude: number,
+  status: boolean,
+  images: string[],
+  duration: number,
+  duration_type: string,
+  category_id: string,
+  user_id: string
+) => {
+  let property = await Property.create({
     title,
     description,
-    price,
+    services,
+    price: Number(price),
     location,
-    longitude,
-    latitude,
-    bedrooms,
-    bathrooms,
-    image
+    longitude: Number(longitude),
+    latitude: Number(latitude),
+    status,
+    images,
+    duration: Number(duration),
+    duration_type,
+    category_id,
+    user_id,
   });
-  await property.save();
   return property;
 };
+
+export const getPropertiesService = async () => {
+  const properties = await Property.find().populate("category_id", "name").populate("user_id", "fullName email phoneNumber email _id");
+  return properties;
+}

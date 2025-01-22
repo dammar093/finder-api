@@ -4,8 +4,7 @@ import mongoose, { Schema, Document, ObjectId } from "mongoose";
 export interface PropertyInerface extends Document {
   title: string;
   description: string;
-  services?: string[];
-  features?: string[];
+  services: string[];
   price: number;
   location: string;
   longitude: number;
@@ -15,7 +14,7 @@ export interface PropertyInerface extends Document {
   duration: number;
   duration_type: string;
   category_id: ObjectId;
-  user: ObjectId;
+  user_id: ObjectId;
 }
 
 // property schema
@@ -29,9 +28,6 @@ const propertySchem = new Schema<PropertyInerface>({
     required: true,
   },
   services: {
-    type: [String],
-  },
-  features: {
     type: [String],
   },
   price: {
@@ -71,7 +67,7 @@ const propertySchem = new Schema<PropertyInerface>({
     type: Schema.Types.ObjectId,
     ref: "Category"
   },
-  user: {
+  user_id: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }

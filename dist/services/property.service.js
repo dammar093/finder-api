@@ -12,21 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadPropertyService = void 0;
+exports.getPropertiesService = exports.createPropertyService = void 0;
 const property_model_1 = __importDefault(require("../models/property.model"));
-const uploadPropertyService = (title, description, price, location, longitude, latitude, bedrooms, bathrooms, image) => __awaiter(void 0, void 0, void 0, function* () {
-    const property = new property_model_1.default({
+const createPropertyService = (title, description, services, price, location, longitude, latitude, status, images, duration, duration_type, category_id, user_id) => __awaiter(void 0, void 0, void 0, function* () {
+    let property = yield property_model_1.default.create({
         title,
         description,
-        price,
+        services,
+        price: Number(price),
         location,
-        longitude,
-        latitude,
-        bedrooms,
-        bathrooms,
-        image
+        longitude: Number(longitude),
+        latitude: Number(latitude),
+        status,
+        images,
+        duration: Number(duration),
+        duration_type,
+        category_id,
+        user_id,
     });
-    yield property.save();
     return property;
 });
-exports.uploadPropertyService = uploadPropertyService;
+exports.createPropertyService = createPropertyService;
+const getPropertiesService = () => __awaiter(void 0, void 0, void 0, function* () {
+    const properties = yield property_model_1.default.find().populate("category_id", "name").populate("user_id", "fullName email phoneNumber email _id");
+    return properties;
+});
+exports.getPropertiesService = getPropertiesService;

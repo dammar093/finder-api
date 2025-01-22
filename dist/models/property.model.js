@@ -67,7 +67,23 @@ const propertySchem = new mongoose_1.Schema({
         type: [String],
         required: true
     },
-    user: {
+    status: {
+        type: Boolean,
+        default: true
+    },
+    duration: {
+        type: Number,
+        required: true
+    },
+    duration_type: {
+        type: String,
+        required: true
+    },
+    category_id: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Category"
+    },
+    user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "User"
     }
