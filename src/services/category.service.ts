@@ -12,3 +12,16 @@ export const createCategoryService = async (name: string) => {
   const category = await Category.create({ name });
   return category;
 };
+
+export const updateCategoryService = async (id: string, isActive: boolean) => {
+
+  //check if category exists
+  const category = await Category.findById(id);
+  if (!category) {
+    throw new ApiError(400, "Category not found");
+  }
+  //update category
+  category.isActive = isActive;
+  await category.save();
+  return category;
+} 
