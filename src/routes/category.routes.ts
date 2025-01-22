@@ -4,7 +4,7 @@ import { createCategory, updateCategory } from "../controllers/category.controll
 
 const router = Router();
 router.post("/", verifyJwtToken, createCategory);
-router.patch("/update-status/:id", verifyJwtToken, updateCategory);
+router.patch("/:id", verifyJwtToken, updateCategory);
 router.get("/", verifyJwtToken, updateCategory);
 
 export default router;
