@@ -8,6 +8,6 @@ const auth_1 = __importDefault(require("../utils/auth"));
 const category_controller_1 = require("../controllers/category.controller");
 const router = (0, express_1.Router)();
 router.post("/", auth_1.default, category_controller_1.createCategory);
-router.patch("/update-status/:id", auth_1.default, category_controller_1.updateCategory);
-router.get("/", auth_1.default, category_controller_1.updateCategory);
+router.patch("/:id", auth_1.default, category_controller_1.updateCategory);
+router.get("/", auth_1.default, category_controller_1.getCategories);
 exports.default = router;

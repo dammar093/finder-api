@@ -3,7 +3,7 @@ import asyncHandler from "../utils/asyncHandler";
 import ApiError from "../utils/errorHandler";
 import { createCategoryService, getCategoriesService, updateCategoryService } from "../services/category.service";
 import ApiResponse from "../utils/apiResponse";
-import { get } from "mongoose";
+
 
 export const createCategory = asyncHandler(async (req: Request, res: Response) => {
   const { name } = req.body;
