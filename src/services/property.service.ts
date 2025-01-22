@@ -1,6 +1,6 @@
 import Property, { PropertyInerface } from "../models/property.model";
 
-export const createPropertyService = async (
+export const createPropertiesService = async (
   title: string,
   description: string,
   services: string[],
@@ -36,4 +36,9 @@ export const createPropertyService = async (
 export const getPropertiesService = async () => {
   const properties = await Property.find().populate("category_id", "name").populate("user_id", "fullName email phoneNumber email _id");
   return properties;
+}
+
+export const getPropertyService = async (id: string) => {
+  const property = await Property.findById(id).populate("category_id", "_id name").populate("user_id", "fullName email phoneNumber email _id");
+  return property;
 }

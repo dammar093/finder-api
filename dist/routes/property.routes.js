@@ -10,4 +10,5 @@ const property_controller_1 = require("../controllers/property.controller");
 const router = (0, express_1.Router)();
 router.post("/", auth_1.default, multer_1.upload.array("image", 5), property_controller_1.createProperty);
 router.get("/", auth_1.default, property_controller_1.getProperties);
+router.get("/:id", auth_1.default, property_controller_1.getProperty);
 exports.default = router;

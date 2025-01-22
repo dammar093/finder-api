@@ -1,16 +1,14 @@
 import { Request, Response } from "express";
 import asyncHandler from "../utils/asyncHandler";
 import { uploadImage } from "../utils/cloudinary";
-import { log } from "console";
 import ApiError from "../utils/errorHandler";
-import { createPropertyService, getPropertiesService } from "../services/property.service";
+import { createPropertiesService, getPropertiesService, getPropertyService } from "../services/property.service";
 import ApiResponse from "../utils/apiResponse";
 
 export const createProperty = asyncHandler(async (req: Request, res: Response) => {
-  const { title, description, services, features, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
+  const { title, description, services, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
   // @ts-ignore
   const id = req.user._id;
-  log(id);
   const image = req.files;
   const images: string[] = [];
   if (!title || !description || !price || !location || !longitude || !latitude || !duration || !duration_type || !services) {
@@ -33,7 +31,7 @@ export const createProperty = asyncHandler(async (req: Request, res: Response) =
     }
   }
 
-  const property = await createPropertyService(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
+  const property = await createPropertiesService(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
   if (!property) {
     throw new ApiError(400, "Property not created");
   }
@@ -47,4 +45,12 @@ export const getProperties = asyncHandler(async (req: Request, res: Response) =>
     throw new ApiError(404, "Properties not found");
   }
   res.status(200).json(new ApiResponse(200, properties, "Properties found"));
+});
+
+export const getProperty = asyncHandler(async (req: Request, res: Response) => {
+  const property = await getPropertyService(req.params.id);
+  if (!property) {
+    throw new ApiError(404, "Property not found");
+  }
+  res.status(200).json(new ApiResponse(200, property, "Property found"));
 });

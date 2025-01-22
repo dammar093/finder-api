@@ -12,18 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProperties = exports.createProperty = void 0;
+exports.getProperty = exports.getProperties = exports.createProperty = void 0;
 const asyncHandler_1 = __importDefault(require("../utils/asyncHandler"));
 const cloudinary_1 = require("../utils/cloudinary");
-const console_1 = require("console");
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const property_service_1 = require("../services/property.service");
 const apiResponse_1 = __importDefault(require("../utils/apiResponse"));
 exports.createProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, description, services, features, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
+    const { title, description, services, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
     // @ts-ignore
     const id = req.user._id;
-    (0, console_1.log)(id);
     const image = req.files;
     const images = [];
     if (!title || !description || !price || !location || !longitude || !latitude || !duration || !duration_type || !services) {
@@ -44,7 +42,7 @@ exports.createProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(voi
             images.push(result);
         }
     }
-    const property = yield (0, property_service_1.createPropertyService)(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
+    const property = yield (0, property_service_1.createPropertiesService)(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
     if (!property) {
         throw new errorHandler_1.default(400, "Property not created");
     }
@@ -56,4 +54,11 @@ exports.getProperties = (0, asyncHandler_1.default)((req, res) => __awaiter(void
         throw new errorHandler_1.default(404, "Properties not found");
     }
     res.status(200).json(new apiResponse_1.default(200, properties, "Properties found"));
+}));
+exports.getProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const property = yield (0, property_service_1.getPropertyService)(req.params.id);
+    if (!property) {
+        throw new errorHandler_1.default(404, "Property not found");
+    }
+    res.status(200).json(new apiResponse_1.default(200, property, "Property found"));
 }));
