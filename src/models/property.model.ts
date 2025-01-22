@@ -1,16 +1,20 @@
 import mongoose, { Schema, Document, ObjectId } from "mongoose";
-import { UserInterface } from "./user.model";
 
 // property interface
 export interface PropertyInerface extends Document {
   title: string;
   description: string;
   services?: string[];
+  features?: string[];
   price: number;
   location: string;
   longitude: number;
   latitude: number;
   images: string[];
+  status: boolean;
+  duration: number;
+  duration_type: string;
+  category_id: ObjectId;
   user: ObjectId;
 }
 
@@ -25,6 +29,9 @@ const propertySchem = new Schema<PropertyInerface>({
     required: true,
   },
   services: {
+    type: [String],
+  },
+  features: {
     type: [String],
   },
   price: {
@@ -46,6 +53,23 @@ const propertySchem = new Schema<PropertyInerface>({
   images: {
     type: [String],
     required: true
+  },
+  status: {
+    type: Boolean,
+    default: true
+  },
+
+  duration: {
+    type: Number,
+    required: true
+  },
+  duration_type: {
+    type: String,
+    required: true
+  },
+  category_id: {
+    type: Schema.Types.ObjectId,
+    ref: "Category"
   },
   user: {
     type: Schema.Types.ObjectId,
