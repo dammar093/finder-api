@@ -13,8 +13,8 @@ export interface PropertyInerface extends Document {
   status: boolean;
   duration: number;
   duration_type: string;
-  category_id: ObjectId;
-  user_id: ObjectId;
+  category: ObjectId;
+  user: ObjectId;
 }
 
 // property schema
@@ -63,11 +63,11 @@ const propertySchem = new Schema<PropertyInerface>({
     type: String,
     required: true
   },
-  category_id: {
+  category: {
     type: Schema.Types.ObjectId,
     ref: "Category"
   },
-  user_id: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }

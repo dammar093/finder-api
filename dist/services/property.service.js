@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPropertyService = exports.getPropertiesService = exports.createPropertiesService = void 0;
 const property_model_1 = __importDefault(require("../models/property.model"));
-const createPropertiesService = (title, description, services, price, location, longitude, latitude, status, images, duration, duration_type, category_id, user_id) => __awaiter(void 0, void 0, void 0, function* () {
+const createPropertiesService = (title, description, services, price, location, longitude, latitude, status, images, duration, duration_type, category, user) => __awaiter(void 0, void 0, void 0, function* () {
     let property = yield property_model_1.default.create({
         title,
         description,
@@ -27,19 +27,19 @@ const createPropertiesService = (title, description, services, price, location, 
         images,
         duration: Number(duration),
         duration_type,
-        category_id,
-        user_id,
+        category,
+        user,
     });
     return property;
 });
 exports.createPropertiesService = createPropertiesService;
 const getPropertiesService = () => __awaiter(void 0, void 0, void 0, function* () {
-    const properties = yield property_model_1.default.find().populate("category_id", "name").populate("user_id", "fullName email phoneNumber email _id");
+    const properties = yield property_model_1.default.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id");
     return properties;
 });
 exports.getPropertiesService = getPropertiesService;
 const getPropertyService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const property = yield property_model_1.default.findById(id).populate("category_id", "_id name").populate("user_id", "fullName email phoneNumber email _id");
+    const property = yield property_model_1.default.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id");
     return property;
 });
 exports.getPropertyService = getPropertyService;

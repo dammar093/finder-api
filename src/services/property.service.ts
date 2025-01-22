@@ -1,4 +1,4 @@
-import Property, { PropertyInerface } from "../models/property.model";
+import Property from "../models/property.model";
 
 export const createPropertiesService = async (
   title: string,
@@ -12,8 +12,8 @@ export const createPropertiesService = async (
   images: string[],
   duration: number,
   duration_type: string,
-  category_id: string,
-  user_id: string
+  category: string,
+  user: string
 ) => {
   let property = await Property.create({
     title,
@@ -27,18 +27,18 @@ export const createPropertiesService = async (
     images,
     duration: Number(duration),
     duration_type,
-    category_id,
-    user_id,
+    category,
+    user,
   });
   return property;
 };
 
 export const getPropertiesService = async () => {
-  const properties = await Property.find().populate("category_id", "name").populate("user_id", "fullName email phoneNumber email _id");
+  const properties = await Property.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id");
   return properties;
 }
 
 export const getPropertyService = async (id: string) => {
-  const property = await Property.findById(id).populate("category_id", "_id name").populate("user_id", "fullName email phoneNumber email _id");
+  const property = await Property.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id");
   return property;
 }

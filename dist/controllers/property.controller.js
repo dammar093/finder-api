@@ -19,7 +19,7 @@ const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const property_service_1 = require("../services/property.service");
 const apiResponse_1 = __importDefault(require("../utils/apiResponse"));
 exports.createProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, description, services, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
+    const { title, description, services, price, location, longitude, latitude, duration, duration_type, category } = req.body;
     // @ts-ignore
     const id = req.user._id;
     const image = req.files;
@@ -42,7 +42,7 @@ exports.createProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(voi
             images.push(result);
         }
     }
-    const property = yield (0, property_service_1.createPropertiesService)(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
+    const property = yield (0, property_service_1.createPropertiesService)(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category, id);
     if (!property) {
         throw new errorHandler_1.default(400, "Property not created");
     }

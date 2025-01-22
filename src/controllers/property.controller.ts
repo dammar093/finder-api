@@ -6,7 +6,7 @@ import { createPropertiesService, getPropertiesService, getPropertyService } fro
 import ApiResponse from "../utils/apiResponse";
 
 export const createProperty = asyncHandler(async (req: Request, res: Response) => {
-  const { title, description, services, price, location, longitude, latitude, duration, duration_type, category_id } = req.body;
+  const { title, description, services, price, location, longitude, latitude, duration, duration_type, category } = req.body;
   // @ts-ignore
   const id = req.user._id;
   const image = req.files;
@@ -31,7 +31,7 @@ export const createProperty = asyncHandler(async (req: Request, res: Response) =
     }
   }
 
-  const property = await createPropertiesService(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category_id, id);
+  const property = await createPropertiesService(title, description, services, price, location, longitude, latitude, true, images, duration, duration_type, category, id);
   if (!property) {
     throw new ApiError(400, "Property not created");
   }

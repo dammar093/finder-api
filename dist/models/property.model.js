@@ -79,11 +79,11 @@ const propertySchem = new mongoose_1.Schema({
         type: String,
         required: true
     },
-    category_id: {
+    category: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Category"
     },
-    user_id: {
+    user: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "User"
     }
