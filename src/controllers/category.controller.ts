@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import asyncHandler from "../utils/asyncHandler";
 import ApiError from "../utils/errorHandler";
-import { createCategoryService, updateCategoryService } from "../services/category.service";
+import { createCategoryService, getCategoriesService, updateCategoryService } from "../services/category.service";
 import ApiResponse from "../utils/apiResponse";
+import { get } from "mongoose";
 
 export const createCategory = asyncHandler(async (req: Request, res: Response) => {
   const { name } = req.body;
@@ -28,4 +29,12 @@ export const updateCategory = asyncHandler(async (req: Request, res: Response) =
     throw new ApiError(400, "Category not found with this id");
   }
   return res.status(200).json(new ApiResponse(200, category, "Category updated successfully"));
+});
+
+export const getCategories = asyncHandler(async (req: Request, res: Response) => {
+  const categories = await getCategoriesService();
+  if (!categories) {
+    throw new ApiError(404, "Categories not found");
+  }
+  return res.status(200).json(new ApiResponse(200, categories, "Categories fetched successfully"));
 });
