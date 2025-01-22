@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCategoryService = void 0;
+exports.getCategoriesService = exports.updateCategoryService = exports.createCategoryService = void 0;
 const category_model_1 = __importDefault(require("../models/category.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const createCategoryService = (name) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,3 +26,20 @@ const createCategoryService = (name) => __awaiter(void 0, void 0, void 0, functi
     return category;
 });
 exports.createCategoryService = createCategoryService;
+const updateCategoryService = (id, isActive) => __awaiter(void 0, void 0, void 0, function* () {
+    //check if category exists
+    const category = yield category_model_1.default.findById(id);
+    if (!category) {
+        throw new errorHandler_1.default(400, "Category not found");
+    }
+    //update category
+    category.isActive = isActive;
+    yield category.save();
+    return category;
+});
+exports.updateCategoryService = updateCategoryService;
+const getCategoriesService = () => __awaiter(void 0, void 0, void 0, function* () {
+    const categories = yield category_model_1.default.find();
+    return categories;
+});
+exports.getCategoriesService = getCategoriesService;
