@@ -1,6 +1,6 @@
 import app from "./app";
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response } from "express";
 import userRouter from "./routes/user.routes"
 import categoryRouter from "./routes/category.routes";
 import propertyRouter from "./routes/property.routes";
@@ -16,6 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 connectDb().then(() => {
+  app.use("/api/v1", (req: Request, res: Response) => {
+    res.send("Welcome to PropertyPro-lite API")
+  });
   app.use("/api/v1/users", userRouter);
   app.use("/api/v1/categories", categoryRouter);
   app.use("/api/v1/properties", propertyRouter);
