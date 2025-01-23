@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 connectDb().then(() => {
-  app.use("/api/v1", (req: Request, res: Response) => {
+  app.use("/", (req: Request, res: Response) => {
     res.send("Welcome to PropertyPro-lite API")
   });
   app.use("/api/v1/users", userRouter);
