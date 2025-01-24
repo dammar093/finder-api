@@ -39,6 +39,6 @@ export const getPropertiesService = async () => {
 }
 
 export const getPropertyService = async (id: string) => {
-  const property = await Property.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id");
+  const property = await Property.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id profile");
   return property;
 }
