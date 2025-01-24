@@ -34,7 +34,7 @@ export const createPropertiesService = async (
 };
 
 export const getPropertiesService = async () => {
-  const properties = await Property.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id");
+  const properties = await Property.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id profile");
   return properties;
 }
 
