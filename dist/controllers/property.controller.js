@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProperty = exports.getProperties = exports.createProperty = void 0;
+exports.updateProperty = exports.getProperty = exports.getProperties = exports.createProperty = void 0;
 const asyncHandler_1 = __importDefault(require("../utils/asyncHandler"));
 const cloudinary_1 = require("../utils/cloudinary");
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
@@ -61,4 +61,13 @@ exports.getProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0
         throw new errorHandler_1.default(404, "Property not found");
     }
     res.status(200).json(new apiResponse_1.default(200, property, "Property found"));
+}));
+exports.updateProperty = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, description, services, price, location, longitude, latitude, duration, duration_type, category } = req.body;
+    const { id } = req.params;
+    const property = yield (0, property_service_1.updatePropertyService)(title, description, price, location, duration, duration_type, services, id);
+    if (!property) {
+        throw new errorHandler_1.default(400, "Canot update property");
+    }
+    return res.status(200).json(new apiResponse_1.default(200, property, "Property updated successfully"));
 }));

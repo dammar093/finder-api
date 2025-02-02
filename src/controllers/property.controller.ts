@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import asyncHandler from "../utils/asyncHandler";
 import { uploadImage } from "../utils/cloudinary";
 import ApiError from "../utils/errorHandler";
-import { createPropertiesService, getPropertiesService, getPropertyService } from "../services/property.service";
+import { createPropertiesService, getPropertiesService, getPropertyService, updatePropertyService } from "../services/property.service";
 import ApiResponse from "../utils/apiResponse";
 
 export const createProperty = asyncHandler(async (req: Request, res: Response) => {
@@ -54,3 +54,16 @@ export const getProperty = asyncHandler(async (req: Request, res: Response) => {
   }
   res.status(200).json(new ApiResponse(200, property, "Property found"));
 });
+
+export const updateProperty = asyncHandler(async (req: Request, res: Response) => {
+  const { title, description, services, price, location, longitude, latitude, duration, duration_type, category } = req.body;
+  const { id } = req.params
+
+  const property = await updatePropertyService(title, description, price, location, duration, duration_type, services, id)
+  if (!property) {
+    throw new ApiError(400, "Canot update property")
+  }
+  return res.status(200).json(
+    new ApiResponse(200, property, "Property updated successfully")
+  )
+})

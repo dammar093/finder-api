@@ -42,3 +42,18 @@ export const getPropertyService = async (id: string) => {
   const property = await Property.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id profile");
   return property;
 }
+
+export const updatePropertyService = async (title: string, description: string, price: number, location: string, duration: number, duration_type: string, services: string[], id: string) => {
+  const property = await Property.findByIdAndUpdate({ _id: id }, {
+    $set: {
+      title,
+      description,
+      price,
+      location,
+      duration,
+      duration_type,
+      services
+    }
+  }, { new: true })
+  return property
+}

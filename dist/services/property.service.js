@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPropertyService = exports.getPropertiesService = exports.createPropertiesService = void 0;
+exports.updatePropertyService = exports.getPropertyService = exports.getPropertiesService = exports.createPropertiesService = void 0;
 const property_model_1 = __importDefault(require("../models/property.model"));
 const createPropertiesService = (title, description, services, price, location, longitude, latitude, status, images, duration, duration_type, category, user) => __awaiter(void 0, void 0, void 0, function* () {
     let property = yield property_model_1.default.create({
@@ -43,3 +43,18 @@ const getPropertyService = (id) => __awaiter(void 0, void 0, void 0, function* (
     return property;
 });
 exports.getPropertyService = getPropertyService;
+const updatePropertyService = (title, description, price, location, duration, duration_type, services, id) => __awaiter(void 0, void 0, void 0, function* () {
+    const property = yield property_model_1.default.findByIdAndUpdate({ _id: id }, {
+        $set: {
+            title,
+            description,
+            price,
+            location,
+            duration,
+            duration_type,
+            services
+        }
+    }, { new: true });
+    return property;
+});
+exports.updatePropertyService = updatePropertyService;
