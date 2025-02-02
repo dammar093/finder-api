@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import asyncHandler from "../utils/asyncHandler";
 import { uploadImage } from "../utils/cloudinary";
 import ApiError from "../utils/errorHandler";
-import { createPropertiesService, getPropertiesService, getPropertyService, updatePropertyService } from "../services/property.service";
+import { createPropertiesService, deletePropertyService, getPropertiesService, getPropertyService, updatePropertyService } from "../services/property.service";
 import ApiResponse from "../utils/apiResponse";
 
 export const createProperty = asyncHandler(async (req: Request, res: Response) => {
@@ -65,5 +65,15 @@ export const updateProperty = asyncHandler(async (req: Request, res: Response) =
   }
   return res.status(200).json(
     new ApiResponse(200, property, "Property updated successfully")
+  )
+})
+export const deleteProperty = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const prorperty = await deletePropertyService(id)
+  if (!prorperty) {
+    throw new ApiError(400, "Can not delete property")
+  }
+  return res.status(200).json(
+    new ApiResponse(200, prorperty, "Deleted successfylly")
   )
 })

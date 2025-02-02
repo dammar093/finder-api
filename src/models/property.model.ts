@@ -15,6 +15,7 @@ export interface PropertyInerface extends Document {
   duration_type: string;
   category: ObjectId;
   user: ObjectId;
+  isDeleted: boolean
 }
 
 // property schema
@@ -70,8 +71,13 @@ const propertySchem = new Schema<PropertyInerface>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
   }
-})
+
+}, { timestamps: true })
 
 const Property = mongoose.model<PropertyInerface>("Property", propertySchem);
 export default Property;

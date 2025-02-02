@@ -57,3 +57,7 @@ export const updatePropertyService = async (title: string, description: string, 
   }, { new: true })
   return property
 }
+
+export const deletePropertyService = async (id: string) => {
+  return await Property.findByIdAndDelete(id);
+}
