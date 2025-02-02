@@ -34,12 +34,12 @@ const createPropertiesService = (title, description, services, price, location, 
 });
 exports.createPropertiesService = createPropertiesService;
 const getPropertiesService = () => __awaiter(void 0, void 0, void 0, function* () {
-    const properties = yield property_model_1.default.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id");
+    const properties = yield property_model_1.default.find().populate("category", "name").populate("user", "fullName email phoneNumber email _id profile");
     return properties;
 });
 exports.getPropertiesService = getPropertiesService;
 const getPropertyService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const property = yield property_model_1.default.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id");
+    const property = yield property_model_1.default.findById(id).populate("category", "_id name").populate("user", "fullName email phoneNumber email _id profile");
     return property;
 });
 exports.getPropertyService = getPropertyService;

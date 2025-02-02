@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import asyncHandler from "../utils/asyncHandler";
 import ApiError from "../utils/errorHandler";
-import { createCategoryService, getCategoriesService, updateCategoryService } from "../services/category.service";
+import { createCategoryService, deleteCategorySevice, getCategoriesService, updateCategoryService } from "../services/category.service";
 import ApiResponse from "../utils/apiResponse";
 
 
@@ -37,4 +37,14 @@ export const getCategories = asyncHandler(async (req: Request, res: Response) =>
     throw new ApiError(404, "Categories not found");
   }
   return res.status(200).json(new ApiResponse(200, categories, "Categories fetched successfully"));
+});
+export const deleteCetegories = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const category = await deleteCategorySevice(id)
+  if (!category) {
+    throw new ApiError(404, "Category does not exist with this id")
+  }
+  return res.status(200).json(
+    new ApiResponse(200, category, "Category delted successflly")
+  )
 });

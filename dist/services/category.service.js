@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCategoriesService = exports.updateCategoryService = exports.createCategoryService = void 0;
+exports.deleteCategorySevice = exports.getCategoriesService = exports.updateCategoryService = exports.createCategoryService = void 0;
 const category_model_1 = __importDefault(require("../models/category.model"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const createCategoryService = (name) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,3 +43,7 @@ const getCategoriesService = () => __awaiter(void 0, void 0, void 0, function* (
     return categories;
 });
 exports.getCategoriesService = getCategoriesService;
+const deleteCategorySevice = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield category_model_1.default.findByIdAndDelete(id);
+});
+exports.deleteCategorySevice = deleteCategorySevice;

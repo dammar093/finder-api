@@ -30,3 +30,6 @@ export const getCategoriesService = async () => {
   const categories = await Category.find();
   return categories;
 };
+export const deleteCategorySevice = async (id: string) => {
+  return await Category.findByIdAndDelete(id)
+}

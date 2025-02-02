@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCategories = exports.updateCategory = exports.createCategory = void 0;
+exports.deleteCetegories = exports.getCategories = exports.updateCategory = exports.createCategory = void 0;
 const asyncHandler_1 = __importDefault(require("../utils/asyncHandler"));
 const errorHandler_1 = __importDefault(require("../utils/errorHandler"));
 const category_service_1 = require("../services/category.service");
@@ -46,4 +46,12 @@ exports.getCategories = (0, asyncHandler_1.default)((req, res) => __awaiter(void
         throw new errorHandler_1.default(404, "Categories not found");
     }
     return res.status(200).json(new apiResponse_1.default(200, categories, "Categories fetched successfully"));
+}));
+exports.deleteCetegories = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const category = yield (0, category_service_1.deleteCategorySevice)(id);
+    if (!category) {
+        throw new errorHandler_1.default(404, "Category does not exist with this id");
+    }
+    return res.status(200).json(new apiResponse_1.default(200, category, "Category delted successflly"));
 }));

@@ -10,4 +10,5 @@ const router = (0, express_1.Router)();
 router.post("/", auth_1.default, category_controller_1.createCategory);
 router.patch("/:id", auth_1.default, category_controller_1.updateCategory);
 router.get("/", auth_1.default, category_controller_1.getCategories);
+router.delete("/:id", auth_1.default, category_controller_1.deleteCetegories);
 exports.default = router;
