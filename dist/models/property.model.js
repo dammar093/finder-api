@@ -86,7 +86,11 @@ const propertySchem = new mongoose_1.Schema({
     user: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "User"
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
-});
+}, { timestamps: true });
 const Property = mongoose_1.default.model("Property", propertySchem);
 exports.default = Property;

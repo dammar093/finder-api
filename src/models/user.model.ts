@@ -1,5 +1,46 @@
 import mongoose, { Schema, Document } from "mongoose";
-
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     CreateUserInput:
+ *       type: object
+ *       required:
+ *         - email
+ *         - fullName
+ *         - phoneNumber
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           example: dammarrana093@gmail.com
+ *         fullName:
+ *           type: string
+ *           example: Dammar Singh Rana
+ *         phoneNumber:
+ *           type: string
+ *           example: +1234567890
+ *         password:
+ *           type: string
+ *           example: password123
+ *         gender:
+ *           type: string
+ *           enum: [male, female, other]
+ *           example: male
+ *         profile:
+ *           type: string
+ *           example: ""
+ *         role:
+ *           type: string
+ *           enum: [user, admin]
+ *           example: user
+ *         isVerified:
+ *           type: boolean
+ *           example: false
+ *         otp:
+ *           type: string
+ *           example: ""
+ */
 // Interface for User
 export interface UserInterface extends Document {
   fullName: string;

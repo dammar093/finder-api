@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatePropertyService = exports.getPropertyService = exports.getPropertiesService = exports.createPropertiesService = void 0;
+exports.deletePropertyService = exports.updatePropertyService = exports.getPropertyService = exports.getPropertiesService = exports.createPropertiesService = void 0;
 const property_model_1 = __importDefault(require("../models/property.model"));
 const createPropertiesService = (title, description, services, price, location, longitude, latitude, status, images, duration, duration_type, category, user) => __awaiter(void 0, void 0, void 0, function* () {
     let property = yield property_model_1.default.create({
@@ -58,3 +58,7 @@ const updatePropertyService = (title, description, price, location, duration, du
     return property;
 });
 exports.updatePropertyService = updatePropertyService;
+const deletePropertyService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield property_model_1.default.findByIdAndDelete(id);
+});
+exports.deletePropertyService = deletePropertyService;
