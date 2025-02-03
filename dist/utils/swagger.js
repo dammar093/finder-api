@@ -10,7 +10,7 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "finder api docs",
+            title: "Finder API documents",
             version: package_json_1.version
         },
         coponents: {

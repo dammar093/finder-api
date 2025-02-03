@@ -3,17 +3,12 @@ import mongoose, { Schema, Document } from "mongoose";
  * @openapi
  * components:
  *   schemas:
- *     CreateUserInput:
+ *     Users:
  *       type: object
- *       required:
- *         - email
- *         - fullName
- *         - phoneNumber
- *         - password
  *       properties:
  *         email:
  *           type: string
- *           example: dammarrana093@gmail.com
+ *           example: dammarrana0931@gmail.com
  *         fullName:
  *           type: string
  *           example: Dammar Singh Rana
@@ -40,6 +35,7 @@ import mongoose, { Schema, Document } from "mongoose";
  *         otp:
  *           type: string
  *           example: ""
+ *      
  */
 // Interface for User
 export interface UserInterface extends Document {
