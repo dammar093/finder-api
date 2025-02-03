@@ -7,7 +7,7 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "finder api docs",
+      title: "Finder API documents",
       version
     },
     coponents: {
